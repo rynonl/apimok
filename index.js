@@ -4,10 +4,12 @@ var handlers = require('./lib/requestHandlers.js');
 
 var app = express();
 
+var staticDir = process.argv[2];
+
 //configure static file server
 app.configure(function(){	
 	app.use(express.bodyParser());
-	app.use(express.static('/Users/roneill/dev/apimok')); //TODO: This value should be a startup param
+	app.use(express.static(staticDir)); //TODO: This value should be a startup param
 });
 
 //Serve client library
