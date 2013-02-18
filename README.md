@@ -51,7 +51,7 @@ Check out the /samples directory for some working examples.
 Running Tests
 =============
 
-Currently, cross-domain requests are not supported.  This poses 2 limitations: 1) API requests must be relative in your code base in order to be mocked.  (a call to "http://api.yourmain.com/user" cannot be mocked).  2) The apimok server must serve your test .js files.
+Currently, cross-domain requests are not supported.  This poses 2 limitations: 1) API requests must be relative to your application in order to be mocked.  (a call to "http://api.yourmain.com/user" cannot be mocked).  2) The apimok server must serve your test .js files.
 
 A solution to #1 will be available in a later relase, as there is more involved than simply enabling cross-domain requests.  For #2, the apimok node module also serves as a static file server.  All you have to do is tell it where your applicatoin is when you start the server:
 
