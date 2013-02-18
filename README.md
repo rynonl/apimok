@@ -21,7 +21,7 @@ apimok is available as a package via NPM.  This is the recommended way to instal
 Usage
 =====
 
-To pull the apimok client library into your the entry point for your tests:
+To pull the apimok client library into your test suite runner:
 
     <script src="http://localhost:3001/apimok-lib"></script>
 
