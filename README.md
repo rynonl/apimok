@@ -60,7 +60,7 @@ A solution to #1 will be available in a later relase, as there is more involved 
     
 (Better command line support coming soon)
 
-With the server running, simply open your test .html file to run your test suite.
+With the server running, simply open your test .html in the browser by going to http://localhost:3001/path/to/testrunner to run your tests.
 
 Current Limitations
 ===================
