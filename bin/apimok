@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var server = require('./lib/server.js');
+var server = require('../lib/server.js');
 var spawn = require('child_process').spawn;
 
 var argv = require('optimist')
@@ -14,7 +14,7 @@ var argv = require('optimist')
 		'a' : {
 			alias: 'app',
 			describe: 'Path to application root',
-			default: __dirname
+			default: process.cwd()
 		},
 		'p' : {
 			alias: 'port',
