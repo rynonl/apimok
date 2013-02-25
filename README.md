@@ -78,6 +78,5 @@ Current Limitations
 ===================
 
 - Does not support cross-domain api requests so your test suite must run with the node server. 
-- No command line support
 - No integration with build servers(CruiseControl, Jenkins, etc)
-- Only supports Json requests
+- Only supports Json responses.
