@@ -1,10 +1,10 @@
 apimok
 ======
 
---Not quite production ready folks
-
 Mock web API requests with Nodejs for use in front-end testing.  
 Allows you to write tests that run all the way up to the API endpoint for deep integration testing.
+
+Supports any browser-based Javascript testing framework.  Currently has command line(via PhantomJS) support for Jasmine.
 
 Requirements
 ============
@@ -21,11 +21,11 @@ apimok is available as a package via NPM.  This is the recommended way to instal
 Usage
 =====
 
-To pull the apimok client library into your test suite runner:
+To pull the apimok client library into your test runner:
 
     <script src="http://localhost:3001/apimok-lib"></script>
 
-This will automatically pull the client library version corresponding to the overall version of apimok. Note that the apimok server runs on port 3001 by default(configurable from command line using the -p flag).
+This will automatically pull the current client library into your page. Note that the apimok server runs on port 3001 by default(configurable from command line using the -p flag).
 
 *Create a new mok*
 
@@ -82,5 +82,5 @@ Current Limitations
 Coming In Later Releases
 ========================
 
-- Support for more testing frameworks
+- Support for more testing frameworks in the command line
 - Integration with common CI servers(CruiseControl, Jenkins)
