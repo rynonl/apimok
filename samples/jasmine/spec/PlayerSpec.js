@@ -93,7 +93,7 @@ describe("Player", function() {
     }, "Player never finished adding", 1000);
 
     runs(function() {
-      expect(player.id).toEqual(3); //player is never actually deleted
+      expect(player.id).toEqual(3); //player is never actually added
     });
   });
 });

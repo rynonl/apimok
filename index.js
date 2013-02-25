@@ -18,23 +18,30 @@ var argv = require('optimist')
 			alias: 'port',
 			describe: 'Port for Apimok server',
 			default: 3001
+		},
+		'm' : {
+			describe: 'Run server in manual standalone mode(no PhantomJs)'
 		}
 	}).argv;
 	
 server.start(argv.app, argv.port);
 
-//Run tests in phantomjs
-var phantom = spawn('phantomjs', ['run-jasmine.js', 'http://localhost:' + argv.port + '/' + argv.target]);
+if(!argv.m){
+	//Run tests in phantomjs
+	var phantom = spawn('phantomjs', ['run-jasmine.js', 'http://localhost:' + argv.port + '/' + argv.target]);
 
-phantom.stdout.on('data', function (data) {
-  console.log('stdout: ' + data);
-});
+	phantom.stdout.on('data', function (data) {
+	  console.log('stdout: ' + data);
+	});
 
-phantom.stderr.on('data', function (data) {
-  console.log('stderr: ' + data);
-});
+	phantom.stderr.on('data', function (data) {
+	  console.log('stderr: ' + data);
+	});
 
-phantom.on('exit', function (code) {
-  console.log('Exiting');
-  process.exit();
-});
+	phantom.on('exit', function (code) {
+	  console.log('Exiting');
+	  process.exit();
+	});
+} else {
+	console.log('Server running in manual standalone mode');
+}
