@@ -1,4 +1,4 @@
-apimok
+Apimok
 ======
 
 Mock web API requests with Nodejs for use in front-end testing.  
@@ -14,7 +14,7 @@ Nodejs, PhantomJS, and NPM.
 Installation
 ============
 
-apimok is available as a package via NPM.  This is the recommended way to install and update apimok.
+apimok is available as a package via NPM.  This is the recommended way to install and update Apimok.
 
     npm install apimok
     
