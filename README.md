@@ -27,6 +27,57 @@ To pull the apimok client library into your test runner:
 
 This will automatically pull the current client library into your page. Note that the apimok server runs on port 3001 by default(configurable from command line using the -p flag).
 
+If you are running Jasmine, use the following as a template for your SpecRunner.html.  It pulls in both the client library and the JUnitXmlReport(required).
+
+    <!DOCTYPE HTML>
+    <html>
+    <head>
+      <title>Jasmine Spec Runner</title>
+
+      <link rel="stylesheet" type="text/css" href="lib/jasmine-1.3.1/jasmine.css">
+      <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine.js"></script>
+      <script type="text/javascript" src="lib/jasmine-1.3.1/jasmine-html.js"></script>  
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+      <!-- ApiMok library REQUIRED-->
+      <script type="text/javascript" src="http://localhost:3001/apimok-lib"></script>
+      
+      <!-- JUnitXmlReporter REQUIRED -->
+      <script type="text/javascript" src="http://localhost:3001/junit-xml-reporter"></script>
+
+      <!-- include source files here... -->
+      <script type="text/javascript" src="src/Player.js"></script>
+
+      <!-- include spec files here... -->
+      <script type="text/javascript" src="spec/PlayerSpec.js"></script>
+
+      <script type="text/javascript">
+      (function() {    
+
+        var currentWindowOnload = window.onload;
+
+        window.onload = function() {
+          if (currentWindowOnload) {
+            currentWindowOnload();
+          }
+          execJasmine();
+        };
+
+        function execJasmine() {
+          jasmine.getEnv().addReporter(new jasmine.TrivialReporter());  //REQUIRED
+          jasmine.getEnv().addReporter(new jasmine.JUnitXmlReporter()); //REQUIRED
+          jasmine.getEnv().execute();
+        }
+
+       })();
+       </script>
+
+    </head>
+    <body>
+    </body>
+    </html>
+
+
 *Create a new mok*
 
     var mokServer = new ApiMok(port[optional]);
