@@ -25,11 +25,12 @@ To pull the apimok client library into your test suite runner:
 
     <script src="http://localhost:3001/apimok-lib"></script>
 
-This will automatically pull the client library version corresponding to the overall version of apimok. Note that the apimok server runs on port 3001 by default.  This will be configurable in a later release.
+This will automatically pull the client library version corresponding to the overall version of apimok. Note that the apimok server runs on port 3001 by default(configurable from command line using the -p flag).
 
 *Create a new mok*
-
-    mok({
+    var mokServer = new ApiMok(port[optional]);
+    
+    mokServer.mok({
         url: 'api/test',
         verb: 'GET',
         returnValue: {
@@ -37,8 +38,16 @@ This will automatically pull the client library version corresponding to the ove
             name: 'Test'
         }
     });
+    
+    mokServer.mok({
+        url: 'api/test',
+        verb: 'POST',
+        returnValue: {
+            success: true
+        }
+    });
 
-Now anytime your code hits the endpoint at 'api/test' using a 'GET' request, the object assigned to returnValue will be returned as Json.
+Now anytime your code hits the endpoint at 'api/test' using a 'GET' request, the object assigned to returnValue will be returned as Json.  Same with the POST below it.
 
 *Remove moks*
 
@@ -58,7 +67,7 @@ A solution to #1 will be available in a later relase, as there is more involved 
     cd /Path/to/apimok
     node index.js --app /Path/to/application --target /specrunner.html
     
-(Better command line support coming soon).  To see all options just run _node index.js_.
+(Better command line support coming soon).  To see all options run _node index.js_.
 
 Apimok will now spin up its server and run all the tests at http://localhost:3001/specrunner.html using PhantomJs.  Output will appear in the console.
 
