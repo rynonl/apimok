@@ -1,30 +1,40 @@
-var express = require("express");
-var fs = require('fs');
-var handlers = require('./lib/requestHandlers.js');
+var server = require('./lib/server.js');
+var spawn = require('child_process').spawn;
 
-var app = express();
+var argv = require('optimist')
+	.usage('Run Jasmine tests with an Apimok server\nUsage: $0')
+	.options({
+		't' : {
+			alias: 'target',
+			describe: 'Target relative url for PhantomJs to run test suite',
+			demand: true
+		},
+		'a' : {
+			alias: 'app',
+			describe: 'Path to application root',
+			default: 'Current directory (' + __dirname + ')'
+		},
+		'p' : {
+			alias: 'port',
+			describe: 'Port for Apimok server',
+			default: 3001
+		}
+	}).argv;
+	
+server.start(argv.app, argv.port);
 
-var staticDir = process.argv[2];
+//Run tests in phantomjs
+var phantom = spawn('phantomjs', ['run-jasmine.js', 'http://localhost:' + argv.port + '/' + argv.target]);
 
-//configure static file server
-app.configure(function(){	
-	app.use(express.bodyParser());
-	app.use(express.static(staticDir)); //TODO: This value should be a startup param
+phantom.stdout.on('data', function (data) {
+  console.log('stdout: ' + data);
 });
 
-//Serve client library
-app.get('/apimok-lib', handlers.clientLibHandler);
+phantom.stderr.on('data', function (data) {
+  console.log('stderr: ' + data);
+});
 
-//Add new mok
-app.post('/_mok', handlers.addMokHandler);
-
-//Remove all moks
-app.post('/_removeAllMoks', handlers.removeAllMoksHandler);
-
-//Handle mok responses
-app.get('/*', handlers.mokResponseHandler);
-app.post('/*', handlers.mokResponseHandler);
-app.put('/*', handlers.mokResponseHandler);
-app.delete('/*', handlers.mokResponseHandler);
-
-app.listen(3001);
+phantom.on('exit', function (code) {
+  console.log('Exiting');
+  process.exit();
+});

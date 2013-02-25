@@ -19,17 +19,7 @@
   <script type="text/javascript" src="spec/PlayerSpec.js"></script>
 
   <script type="text/javascript">
-    (function() {
-      var jasmineEnv = jasmine.getEnv();
-      jasmineEnv.updateInterval = 1000;
-
-      var htmlReporter = new jasmine.HtmlReporter();
-
-      jasmineEnv.addReporter(htmlReporter);
-
-      jasmineEnv.specFilter = function(spec) {
-        return htmlReporter.specFilter(spec);
-      };
+    (function() {    
 
       var currentWindowOnload = window.onload;
 
@@ -41,7 +31,8 @@
       };
 
       function execJasmine() {
-        jasmineEnv.execute();
+        jasmine.getEnv().addReporter(new jasmine.TrivialReporter());
+        jasmine.getEnv().execute();
       }
 
     })();
