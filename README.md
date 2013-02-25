@@ -51,16 +51,18 @@ Check out the /samples directory for some working examples.
 Running Tests
 =============
 
-Currently, cross-domain requests are not supported.  This poses 2 limitations: 1) API requests must be relative to your application in order to be mocked.  (a call to "http://api.yourmain.com/user" cannot be mocked).  2) The apimok server must serve your test .js files.
+Currently, cross-domain requests are not supported.  This poses 2 limitations: 1) API requests must be relative to your application in order to be mocked.  (a call to "http://api.yourmain.com/user" cannot be mocked).  2) Your test specs must be included somewhere under your app's root direction(this is typical anyway).
 
 A solution to #1 will be available in a later relase, as there is more involved than simply enabling cross-domain requests.  For #2, the apimok node module also serves as a static file server.  All you have to do is tell it where your application is when you start the server:
 
     cd /Path/to/apimok
-    node index.js /Path/to/application
+    node index.js --app /Path/to/application --target /specrunner.html
     
-(Better command line support coming soon)
+(Better command line support coming soon).  To see all options just run _node index.js_.
 
-With the server running, simply open your test .html in the browser by going to http://localhost:3001/path/to/testrunner to run your tests.
+Apimok will now spin up its server and run all the tests at http://localhost:3001/specrunner.html using PhantomJs.  Output will appear in the console.
+
+If you prefer to run the server and browse to the output page in your browser, use the _-m_ flag.  With the server running, open your test output page in the browser by going to http://localhost:3001/path/to/testrunner to run your tests.
 
 Current Limitations
 ===================
