@@ -65,6 +65,7 @@ Currently, cross-domain requests are not supported.  This poses 2 limitations: 1
 
 A solution to #1 will be available in a later relase, as there is more involved than simply enabling cross-domain requests.  For #2, the apimok node module also serves as a static file server.  All you have to do is tell it where your application is when you start the server:
 
+    cd /path/to/application
     apimok --with jasmine --target app-test/specrunner.html
     
 To see all options run _apimok_.
