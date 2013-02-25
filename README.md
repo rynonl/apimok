@@ -52,7 +52,7 @@ Now anytime your code hits the endpoint at 'api/test' using a 'GET' request, the
 
 *Remove moks*
 
-    destroyMoks();
+    mokServer.destroyMoks();
     
 This will remove all moks that are currently stored in the server.  Generally part of a TearDown sequence.
 
