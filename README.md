@@ -9,7 +9,7 @@ Supports any browser-based Javascript testing framework.  Currently has command 
 Requirements
 ============
 
-Nodejs and NPM.
+Nodejs, PhantomJS, and NPM.
 
 Installation
 ============
