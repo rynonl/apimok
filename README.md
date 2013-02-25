@@ -65,12 +65,11 @@ Currently, cross-domain requests are not supported.  This poses 2 limitations: 1
 
 A solution to #1 will be available in a later relase, as there is more involved than simply enabling cross-domain requests.  For #2, the apimok node module also serves as a static file server.  All you have to do is tell it where your application is when you start the server:
 
-    cd /Path/to/apimok
-    node index.js --app /Path/to/application --target /specrunner.html
+    apimok --with jasmine --target app-test/specrunner.html
     
-(Better command line support coming soon).  To see all options run _node index.js_.
+To see all options run _apimok_.
 
-Apimok will now spin up its server and run all the tests at http://localhost:3001/specrunner.html using PhantomJs.  Output will appear in the console.
+Apimok will now spin up its server and run all the tests at http://localhost:3001/app-test/specrunner.html using PhantomJs.  Output will appear in the console.
 
 If you prefer to run the server and browse to the output page in your browser, use the _-m_ flag.  With the server running, open your test output page in the browser by going to http://localhost:3001/path/to/testrunner to run your tests.
 
@@ -78,5 +77,10 @@ Current Limitations
 ===================
 
 - Does not support cross-domain api requests so your test suite must run with the node server. 
-- No integration with build servers(CruiseControl, Jenkins, etc)
 - Only supports Json responses.
+
+Coming In Later Releases
+========================
+
+- Support for more testing frameworks
+- Integration with common CI servers(CruiseControl, Jenkins)
