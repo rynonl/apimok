@@ -6,6 +6,11 @@ var spawn = require('child_process').spawn;
 var argv = require('optimist')
 	.usage('Run Jasmine tests with an Apimok server\nUsage: $0')
 	.options({
+		'w' : {
+			alias: 'with',
+			describe: 'Unit Testing framework to use. Currently only Jasmine support.',
+			default: 'jasmine'
+		},
 		't' : {
 			alias: 'target',
 			describe: 'Target relative url for PhantomJs to run test suite',
