@@ -1,10 +1,12 @@
 describe("Player", function() {
   var player;
+  var mokServer;
 
   beforeEach(function() {
     player = new Player();
+    mokServer = new ApiMok(3000);
 
-    mok({
+    mokServer.mok({
       url: '/api/player/1',
       verb: 'GET',
       returnValue: {
@@ -13,7 +15,7 @@ describe("Player", function() {
       }
     });
 
-    mok({
+    mokServer.mok({
       url: '/api/player/1',
       verb: 'POST',
       returnValue: {
@@ -21,7 +23,7 @@ describe("Player", function() {
       }
     });
 
-    mok({
+    mokServer.mok({
       url: '/api/player/1',
       verb: 'DELETE',
       returnValue: {
@@ -29,7 +31,7 @@ describe("Player", function() {
       }
     });
 
-    mok({
+    mokServer.mok({
       url: '/api/player/',
       verb: 'PUT',
       returnValue: {
@@ -40,7 +42,7 @@ describe("Player", function() {
   });
 
   afterEach(function() {
-    destroyMoks();
+    mokServer.destroyAll();
   });
 
   it("should load player from Mok", function() {

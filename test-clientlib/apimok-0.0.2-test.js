@@ -1,12 +1,15 @@
 describe("ApiMok", function() {
 
+	var server;
+
 	beforeEach(function() {    
     spyOn(jQuery, 'ajax');
+    server = new ApiMok();
   });
 
 	it("should throw with empty params", function() {
 		var mok = function(){
-			Mok();
+			server.mok();
 		}
 
 		expect(mok).toThrow();
@@ -14,7 +17,7 @@ describe("ApiMok", function() {
 
 	it("should throw when no returnValue supplied", function(){
 		var mok = function() {
-			Mok({url: {}});
+			server.mok({url: {}});
 		}
 
     expect(mok).toThrow();
@@ -22,7 +25,7 @@ describe("ApiMok", function() {
 
 	it("should throw when no Url supplied", function() {
 		var mok = function() {
-			Mok({returnValue: {}, verb: 'GET'});
+			server.mok({returnValue: {}, verb: 'GET'});
 		}
 
     expect(mok).toThrow();
@@ -30,7 +33,7 @@ describe("ApiMok", function() {
 
   it("should throw when no Verb supplied", function() {
 		var mok = function() {
-			Mok({returnValue: {}, url: 'test'});
+			server.mok({returnValue: {}, url: 'test'});
 		}
 
     expect(mok).toThrow();
@@ -38,14 +41,14 @@ describe("ApiMok", function() {
 
   it("should not throw when proper params supplied and jQuery present", function() {
 		var mok = function() {
-			Mok({returnValue: {}, url: 'test', verb: 'GET'});
+			server.mok({returnValue: {}, url: 'test', verb: 'GET'});
 		}
 
     expect(mok).not.toThrow();
   });  
 
   it("should attempt a POST request to Mok server", function() {
-  	Mok({returnValue: {}, url: 'test', verb: 'GET'});
+  	server.mok({returnValue: {}, url: 'test', verb: 'GET'});
   	
   	expect(jQuery.ajax).toHaveBeenCalled();
   	expect(jQuery.ajax.calls.length).toEqual(1);
