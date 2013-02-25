@@ -28,6 +28,11 @@ var argv = require('optimist')
 		},
 		'm' : {
 			describe: 'Run server in manual standalone mode(no PhantomJs)'
+		},
+		'x' : {
+			alias: 'xml',
+			describe: 'Location to output JUnit Xml Results.',
+			default: 'test-results'
 		}
 	}).argv;
 	
@@ -35,7 +40,7 @@ server.start(argv.app, argv.port);
 
 if(!argv.m){
 	//Run tests in phantomjs
-	var phantom = spawn('phantomjs', ['run-jasmine.js', 'http://localhost:' + argv.port + '/' + argv.target]);
+	var phantom = spawn('phantomjs', ['run-jasmine.js', 'http://localhost:' + argv.port + '/' + argv.target, argv.xml]);
 
 
 	phantom.stdout.on('data', function (data) {
