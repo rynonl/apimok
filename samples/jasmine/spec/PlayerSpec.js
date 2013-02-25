@@ -4,7 +4,7 @@ describe("Player", function() {
 
   beforeEach(function() {
     player = new Player();
-    mokServer = new ApiMok(3000);
+    mokServer = new ApiMok();
 
     mokServer.mok({
       url: '/api/player/1',

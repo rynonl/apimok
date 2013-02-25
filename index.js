@@ -12,7 +12,7 @@ var argv = require('optimist')
 		'a' : {
 			alias: 'app',
 			describe: 'Path to application root',
-			default: 'Current directory (' + __dirname + ')'
+			default: __dirname
 		},
 		'p' : {
 			alias: 'port',

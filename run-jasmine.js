@@ -46,9 +46,15 @@ if(page){
         console.log(msg);
     };
 
+    page.onResourceRequested = function (request) {
+        if(request.url.indexOf('.htm') != -1){
+            console.log('Requesting ' + request.url);
+        }
+    };
+
     page.open(phantom.args[0], function(status){
         if (status !== "success") {
-            console.log("Unable to access network");
+            console.log("Page not found: " + phantom.args[0]);
             phantom.exit();
         }
         else {
