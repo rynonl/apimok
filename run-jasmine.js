@@ -211,14 +211,16 @@ function processPage(status, page, resultsKey) {
                 var fs = require("fs"),
                     xml_results = getXmlResults(page, resultsKey),
                     output,
-                    agg_xml;
-                for (var filename in xml_results) {
-                    if (xml_results.hasOwnProperty(filename) && (output = xml_results[filename]) && typeof(output) === "string") {
-                        agg_xml += output;
-                        fs.write(xml_save_location + "/" + filename, output, "w");
+                    agg_xml = '<?xml version="1.0" encoding="UTF-8" ?><testsuites>';
+                    for (var filename in xml_results) {
+                        if (xml_results.hasOwnProperty(filename) && (output = xml_results[filename]) && typeof(output) === "string") {
+                            agg_xml += output.replace('<?xml version="1.0" encoding="UTF-8" ?>', '')
+                                .replace('<testsuites>', '').replace('</testsuites>', '');
+                            //fs.write(xml_save_location + "/" + filename, output, "w");
+                        }
                     }
-                }
-                    fs.write(xml_save_location + "/TEST-Results.xml", agg_xml, "w");
+                    agg_xml += '</testsuites>';
+                    fs.write(xml_save_location + "/JasmineTestResults.xml", agg_xml, "w");
 
                 // print out a success / failure message of the results
                 var results = getResults();
