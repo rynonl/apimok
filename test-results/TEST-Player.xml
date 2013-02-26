@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-<testsuite name="Player" errors="0" tests="4" failures="0" time="0.091" timestamp="2013-02-25T14:59:47">
-  <testcase classname="Player" name="should load player from Mok" time="0.03"></testcase>
+<testsuite name="Player" errors="0" tests="4" failures="0" time="0.098" timestamp="2013-02-25T18:19:47">
+  <testcase classname="Player" name="should load player from Mok" time="0.031"></testcase>
   <testcase classname="Player" name="should update player" time="0.021"></testcase>
-  <testcase classname="Player" name="should delete player" time="0.021"></testcase>
-  <testcase classname="Player" name="should add player" time="0.019"></testcase>
+  <testcase classname="Player" name="should delete player" time="0.023"></testcase>
+  <testcase classname="Player" name="should add player" time="0.023"></testcase>
 </testsuite>
 </testsuites>

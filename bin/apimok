@@ -40,7 +40,7 @@ server.start(argv.app, argv.port);
 
 if(!argv.m){
 	//Run tests in phantomjs
-	var phantom = spawn('phantomjs', ['run-jasmine.js', 'http://localhost:' + argv.port + '/' + argv.target, argv.xml]);
+	var phantom = spawn('phantomjs', [__dirname + '/../run-jasmine.js', 'http://localhost:' + argv.port + '/' + argv.target, argv.xml]);
 
 
 	phantom.stdout.on('data', function (data) {
