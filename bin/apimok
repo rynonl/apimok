@@ -32,7 +32,7 @@ var argv = require('optimist')
 		'x' : {
 			alias: 'xml',
 			describe: 'Location to output JUnit Xml Results.',
-			default: 'test-results'
+			default: './'
 		}
 	}).argv;
 	
