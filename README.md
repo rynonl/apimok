@@ -23,7 +23,7 @@ Usage
 
 To pull the apimok client library into your test runner:
 
-    <script src="http://localhost:3001/apimok-lib"></script>
+    <script src="/apimok-lib"></script>
 
 This will automatically pull the current client library into your page. Note that the apimok server runs on port 3001 by default(configurable from command line using the -p flag).
 
@@ -40,10 +40,10 @@ If you are running Jasmine, use the following as a template for your SpecRunner.
       <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
       <!-- ApiMok library REQUIRED-->
-      <script type="text/javascript" src="http://localhost:3001/apimok-lib"></script>
+      <script type="text/javascript" src="/apimok-lib"></script>
       
       <!-- JUnitXmlReporter REQUIRED -->
-      <script type="text/javascript" src="http://localhost:3001/junit-xml-reporter"></script>
+      <script type="text/javascript" src="/junit-xml-reporter"></script>
 
       <!-- include source files here... -->
       <script type="text/javascript" src="src/Player.js"></script>
