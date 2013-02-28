@@ -231,12 +231,13 @@ function processPage(status, page, resultsKey) {
                     for (var filename in xml_results) {
                         if (xml_results.hasOwnProperty(filename) && (output = xml_results[filename]) && typeof(output) === "string") {
                             agg_xml += output.replace('<?xml version="1.0" encoding="UTF-8" ?>', '')
-                                .replace('<testsuites>', '').replace('</testsuites>', '');
-                            //fs.write(xml_save_location + "/" + filename, output, "w");
+                                .replace('<testsuites>', '').replace('</testsuites>', '');                            
                         }
                     }
                     agg_xml += '\n</testsuites>\n';
+                
                     fs.write(xml_save_location + "/JasmineTestResults.xml", agg_xml, "w");
+                
 
                 // print out a success / failure message of the results
                 var results = getResults();
