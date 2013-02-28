@@ -4,7 +4,7 @@ var server = require('../lib/server.js');
 var spawn = require('child_process').spawn;
 
 var argv = require('optimist')
-	.usage('Run Jasmine tests with an Apimok server\nUsage: $0')
+	.usage('Start an Apimok server at the current directory.\nUsage: $0')
 	.options({
 		'w' : {
 			alias: 'with',
@@ -27,11 +27,11 @@ var argv = require('optimist')
 			default: 3001
 		},
 		'm' : {
-			describe: 'Run server in manual standalone mode(no PhantomJs)'
+			describe: 'Run server in manual standalone mode(no PhantomJs. For development/debugging)'
 		},
 		'x' : {
 			alias: 'xml',
-			describe: 'Filename to store Xml results in. (Requires JUnitXmlReporter to be in SpecRunner)'
+			describe: 'Filename to store Xml results in. (Requires JUnitXmlReporter to be in target)'
 		}
 	}).argv;
 	
