@@ -31,8 +31,7 @@ var argv = require('optimist')
 		},
 		'x' : {
 			alias: 'xml',
-			describe: 'Location to output JUnit Xml Results.',
-			default: process.cwd()
+			describe: 'Filename to store Xml results in. (Requires JUnitXmlReporter to be in SpecRunner)'
 		}
 	}).argv;
 	

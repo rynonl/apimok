@@ -1,7 +1,7 @@
 {
   "name": "apimok",
   "description": "Mock web API requests for use in front-end testing",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "dependencies": {
     "express": "3.x",
     "optimist": "0.3.x"

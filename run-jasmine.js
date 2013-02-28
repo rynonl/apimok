@@ -18,7 +18,7 @@ else {
         };
     };
 
-    var xml_save_location = args[1];
+    var xml_filename = args[1];
 
     address = args[0];
     console.log("Loading " + address);
@@ -222,12 +222,12 @@ function processPage(status, page, resultsKey) {
         };
         var ival = setInterval(function(){
             if (isFinished()) {
-
-                // get the results that need to be written to disk
-                var fs = require("fs"),
-                    xml_results = getXmlResults(page, resultsKey),
-                    output,
-                    agg_xml = '<?xml version="1.0" encoding="UTF-8" ?>\n\n<!-- Jasmine tests -->\n<testsuites>';
+                if(xml_filename != undefined && xml_filename.length > 0) {
+                    // get the results that need to be written to disk
+                    var fs = require("fs"),
+                        xml_results = getXmlResults(page, resultsKey),
+                        output,
+                        agg_xml = '<?xml version="1.0" encoding="UTF-8" ?>\n\n<!-- Jasmine tests -->\n<testsuites>';
                     for (var filename in xml_results) {
                         if (xml_results.hasOwnProperty(filename) && (output = xml_results[filename]) && typeof(output) === "string") {
                             agg_xml += output.replace('<?xml version="1.0" encoding="UTF-8" ?>', '')
@@ -236,9 +236,9 @@ function processPage(status, page, resultsKey) {
                     }
                     agg_xml += '\n</testsuites>\n';
                 
-                    fs.write(xml_save_location + "/JasmineTestResults.xml", agg_xml, "w");
+                    fs.write(xml_filename, agg_xml, "w");
                 
-
+                }
                 // print out a success / failure message of the results
                 var results = getResults();
                 var failures = Number(results[2]);
