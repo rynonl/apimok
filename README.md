@@ -27,7 +27,7 @@ To pull the apimok client library into your test runner:
 
 This will automatically pull the current client library into your page. Note that the apimok server runs on port 3001 by default(configurable from command line using the -p flag).
 
-If you are running Jasmine, use the following as a template for your SpecRunner.html.  It pulls in both the client library and the JUnitXmlReport(required).
+If you are running Jasmine, use the following as a template for your SpecRunner.html.  It pulls in both the client library and the JUnitXmlReporter(Optional).
 
     <!DOCTYPE HTML>
     <html>
@@ -42,7 +42,7 @@ If you are running Jasmine, use the following as a template for your SpecRunner.
       <!-- ApiMok library REQUIRED-->
       <script type="text/javascript" src="/apimok-lib"></script>
       
-      <!-- JUnitXmlReporter REQUIRED -->
+      <!-- JUnitXmlReporter OPTIONAL -->
       <script type="text/javascript" src="/junit-xml-reporter"></script>
 
       <!-- include source files here... -->
@@ -65,7 +65,7 @@ If you are running Jasmine, use the following as a template for your SpecRunner.
 
         function execJasmine() {
           jasmine.getEnv().addReporter(new jasmine.TrivialReporter());  //REQUIRED
-          jasmine.getEnv().addReporter(new jasmine.JUnitXmlReporter()); //REQUIRED
+          jasmine.getEnv().addReporter(new jasmine.JUnitXmlReporter()); //OPTIONAL
           jasmine.getEnv().execute();
         }
 
