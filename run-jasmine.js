@@ -23,9 +23,12 @@ else {
     address = args[0];
     console.log("Loading " + address);
 
-    // if provided a url without a protocol, try to use file://
-    address = address.indexOf("://") === -1 ? "file://" + address : address;
-
+    // if provided a url without a protocol, exit
+    if (address.indexOf("://") === -1) {
+        console.log("No protocol supplied for page address: " + address);
+        phantom.exit(1);
+    }
+    
     // create a WebPage object to work with
     page = require("webpage").create();
     page.url = address;
@@ -34,6 +37,13 @@ else {
     // (and thus before it will try to utilize the functions)
     resultsKey = "__jr" + Math.ceil(Math.random() * 1000000);
     page.onInitialized = setupPageFn(page, resultsKey);
+    page.onResourceReceived = function(resource) {
+      if (resource.url == address && resource.status != 200) {
+        console.log('Error loading target: ' + address);
+        console.log('Response code: ' + resource.status);
+        phantom.exit(1);
+      }
+    };
     page.open(address, processPage(null, page, resultsKey));
     pages.push(page);
 
@@ -152,13 +162,19 @@ function processPage(status, page, resultsKey) {
     else {
         var isFinished = function() {
             return page.evaluate(function(){
-                // if there's a JUnitXmlReporter, return a boolean indicating if it is finished
-                if (jasmine.JUnitXmlReporter) {
-                    return jasmine.JUnitXmlReporter.finished_at !== null;
+                try {
+                    // if there's a JUnitXmlReporter, return a boolean indicating if it is finished
+                    if (jasmine.JUnitXmlReporter) {
+                        return jasmine.JUnitXmlReporter.finished_at !== null;
+                    }
+                } catch(err) {
+                    console.dir(err);
+                    return true;
                 }
                 // otherwise, see if there is anything in a "finished-at" element
                 return document.getElementsByClassName("finished-at").length &&
                        document.getElementsByClassName("finished-at")[0].innerHTML.length > 0;
+
             });
         };        
         var getResults = function() {
@@ -211,7 +227,7 @@ function processPage(status, page, resultsKey) {
                 var fs = require("fs"),
                     xml_results = getXmlResults(page, resultsKey),
                     output,
-                    agg_xml = '<?xml version="1.0" encoding="UTF-8" ?><testsuites>';
+                    agg_xml = '<?xml version="1.0" encoding="UTF-8" ?>\n\n<!-- Jasmine tests -->\n<testsuites>';
                     for (var filename in xml_results) {
                         if (xml_results.hasOwnProperty(filename) && (output = xml_results[filename]) && typeof(output) === "string") {
                             agg_xml += output.replace('<?xml version="1.0" encoding="UTF-8" ?>', '')
@@ -219,7 +235,7 @@ function processPage(status, page, resultsKey) {
                             //fs.write(xml_save_location + "/" + filename, output, "w");
                         }
                     }
-                    agg_xml += '</testsuites>';
+                    agg_xml += '\n</testsuites>\n';
                     fs.write(xml_save_location + "/JasmineTestResults.xml", agg_xml, "w");
 
                 // print out a success / failure message of the results
@@ -232,7 +248,7 @@ function processPage(status, page, resultsKey) {
                 else {
                     page.__exit_code = 0;
                     clearInterval(ival);
-                }
+                }           
             }
         }, 100);
     }

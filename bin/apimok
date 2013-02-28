@@ -32,7 +32,7 @@ var argv = require('optimist')
 		'x' : {
 			alias: 'xml',
 			describe: 'Location to output JUnit Xml Results.',
-			default: './'
+			default: process.cwd()
 		}
 	}).argv;
 	
@@ -45,15 +45,21 @@ if(!argv.m){
 
 	phantom.stdout.on('data', function (data) {
 	  console.log('stdout: ' + data);
+	  if(data.toString().indexOf('Error') != -1){
+	  	console.log('Exiting with errors');
+	  	process.exit(1);
+	  }
 	});
 
 	phantom.stderr.on('data', function (data) {
 	  console.log('stderr: ' + data);
+	  console.log('Exiting with errors');
+	  process.exit(1);
 	});
 
 	phantom.on('exit', function (code) {
 	  console.log('Exiting');
-	  process.exit();
+	  process.exit(0);
 	});
 } else {
 	console.log('Server running in manual standalone mode');
