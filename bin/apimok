@@ -13,8 +13,7 @@ var argv = require('optimist')
 		},
 		't' : {
 			alias: 'target',
-			describe: 'Target relative url for PhantomJs to run test suite',
-			demand: true
+			describe: 'Target relative url for PhantomJs to run test suite. Used for automated testing.'
 		},
 		'a' : {
 			alias: 'app',
@@ -26,9 +25,6 @@ var argv = require('optimist')
 			describe: 'Port for Apimok server',
 			default: 3001
 		},
-		'm' : {
-			describe: 'Run server in manual standalone mode(no PhantomJs. For development/debugging)'
-		},
 		'x' : {
 			alias: 'xml',
 			describe: 'Filename to store Xml results in. (Requires JUnitXmlReporter to be in target)'
@@ -37,7 +33,7 @@ var argv = require('optimist')
 	
 server.start(argv.app, argv.port);
 
-if(!argv.m){
+if(argv.target){
 	//Run tests in phantomjs
 	var phantom = spawn('phantomjs', [__dirname + '/../run-jasmine.js', 'http://localhost:' + argv.port + '/' + argv.target, argv.xml]);
 
