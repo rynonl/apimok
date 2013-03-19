@@ -80,7 +80,7 @@ If you are running Jasmine, use the following as a template for your SpecRunner.
 
 *Create a new mok*
 
-    var mokServer = new ApiMok(port[optional]);
+    var mokServer = new ApiMok();
     
     mokServer.mok({
         url: 'api/test',
