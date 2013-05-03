@@ -123,7 +123,10 @@ To see all options run _apimok_.
 
 Apimok will now spin up its server and run all the tests at http://localhost:3001/app-test/specrunner.html using PhantomJs.  Output will appear in the console.
 
-If you prefer to run the server and browse to the output page(or you are using a framework that is NOT Jasmine) in your browser, use the _-m_ flag.  With the server running, open your test output page in the browser by going to http://localhost:3001/path/to/testrunner to run your tests.
+Running Locally
+===============
+
+If you prefer to run the server and browse to the output page(or you are using a framework that is NOT Jasmine) in your browser, run the apimok command without flags(working directory should be your app root).  With the server running, open your test output page in the browser by going to http://localhost:3001/path/to/testrunner to run your tests.
 
 Current Limitations
 ===================
